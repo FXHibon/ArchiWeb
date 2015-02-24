@@ -1,11 +1,11 @@
 package fr.epsi.firstprojects.services;
 
-import fr.epsi.firstprojects.beans.Utilisateur;
+import fr.epsi.firstprojects.beans.User;
 
 public class LogonService {
 
-	public static boolean isAuthorized(Utilisateur user) {
-		boolean authorized = true;
+    public static boolean isAuthorized(User user) {
+        boolean authorized = true;
 		if (user == null) {
 			authorized = false;
 		} else if (user.getLogin() == null || user.getPassword() == null){

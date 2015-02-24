@@ -11,16 +11,15 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
-import fr.epsi.firstprojects.beans.Contact;
+import fr.epsi.firstprojects.beans.Product;
 import fr.epsi.firstprojects.listeners.MyListener;
 import fr.epsi.firstprojects.services.ContactService;
 
-@Service
 public class ContactServiceImpl implements ContactService {
 
 	@Override
-	public List<Contact> getContacts() {
-		List<Contact> contacts = new ArrayList<Contact>();
+    public List<Product> getContacts() {
+        List<Product> products = new ArrayList<Product>();
 
 		try {
 			ResultSet resultats = null;
@@ -31,12 +30,12 @@ public class ContactServiceImpl implements ContactService {
 				resultats = stmt.executeQuery(requete);
 
 				while (resultats.next()) {
-					Contact contact = new Contact();
-					contact.setLogin(resultats.getString(1));
-					contact.setName(resultats.getString(2));
-					contact.setPassword(resultats.getString(3));
-					contacts.add(contact);
-				}
+                    Product product = new Product();
+                    product.setLogin(resultats.getString(1));
+                    product.setName(resultats.getString(2));
+                    product.setPassword(resultats.getString(3));
+                    products.add(product);
+                }
 
 				resultats.close();
 				MyListener.getConnection().close();
@@ -48,67 +47,67 @@ public class ContactServiceImpl implements ContactService {
 			e.printStackTrace();
 		}
 
-		return contacts;
-	}
+        return products;
+    }
 
 	@Override
-	public boolean addContact(Contact contact) {
-		try {
+    public boolean addContact(Product product) {
+        try {
 			Connection conn = MyListener.getConnection();
 			PreparedStatement stmt = conn
 					.prepareStatement("INSERT INTO USERS VALUES (?, ?, ?)");
-			stmt.setString(1, contact.getLogin());
-			stmt.setString(2, contact.getName());
-			stmt.setString(3, contact.getPassword());
-			stmt.executeUpdate();
+            stmt.setString(1, product.getLogin());
+            stmt.setString(2, product.getName());
+            stmt.setString(3, product.getPassword());
+            stmt.executeUpdate();
 			conn.close();
 			
 			return true;
 		} catch (Exception e) {
-			Logger.getRootLogger().error("Erreur lors d'insertion en base de données",e);
+			Logger.getRootLogger().error("Erreur lors d'insertion en base de donnï¿½es",e);
 			return false;
 		}
 	}
 
 	@Override
-	public boolean updateContact(Contact contact) {
-		try {
+    public boolean updateContact(Product product) {
+        try {
 			Connection conn = MyListener.getConnection();
 			PreparedStatement stmt = conn
 					.prepareStatement("UPDATE USERS SET NOM=?, PASSWORD=? WHERE ID=?");
-			stmt.setString(1, contact.getName());
-			stmt.setString(2, contact.getPassword());
-			stmt.setString(3, contact.getLogin());
-			stmt.executeUpdate();
+            stmt.setString(1, product.getName());
+            stmt.setString(2, product.getPassword());
+            stmt.setString(3, product.getLogin());
+            stmt.executeUpdate();
 			conn.close();
 			return true;
 			
 		} catch (Exception e) {
-			Logger.getRootLogger().error("Erreur lors de la mise à jour en base de données",e);
+			Logger.getRootLogger().error("Erreur lors de la mise ï¿½ jour en base de donnï¿½es",e);
 			return false;
 		}
 	}
 
 	@Override
-	public boolean deleteContact(Contact contact) {
-		try {
+    public boolean deleteContact(Product product) {
+        try {
 			Connection conn = MyListener.getConnection();
 			PreparedStatement stmt = conn
 					.prepareStatement("DELETE FROM USERS WHERE ID=?");
-			stmt.setString(1, contact.getLogin());
-			stmt.executeUpdate();
+            stmt.setString(1, product.getLogin());
+            stmt.executeUpdate();
 			conn.close();
 			
 			return true;
 		} catch (Exception e) {
-			Logger.getRootLogger().error("Erreur lors de la suppression en base de données",e);
+			Logger.getRootLogger().error("Erreur lors de la suppression en base de donnï¿½es",e);
 			return false;
 		}
 	}
 
 	@Override
-	public Contact getContact(String id) {
-		Contact contact = null;
+    public Product getContact(String id) {
+        Product product = null;
 
 		try {
 			ResultSet resultats = null;
@@ -120,11 +119,11 @@ public class ContactServiceImpl implements ContactService {
 				stmt.setString(1, id);
 				resultats = stmt.executeQuery();
 				if (resultats.next()) {
-					contact = new Contact();
-					contact.setLogin(resultats.getString(1));
-					contact.setName(resultats.getString(2));
-					contact.setPassword(resultats.getString(3));
-				}
+                    product = new Product();
+                    product.setLogin(resultats.getString(1));
+                    product.setName(resultats.getString(2));
+                    product.setPassword(resultats.getString(3));
+                }
 
 				resultats.close();
 				MyListener.getConnection().close();
@@ -136,7 +135,7 @@ public class ContactServiceImpl implements ContactService {
 			e.printStackTrace();
 		}
 
-		return contact;
-	}
+        return product;
+    }
 
 }

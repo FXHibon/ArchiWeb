@@ -1,12 +1,12 @@
 package fr.epsi.firstprojects.beans;
 
-
-public class Contact {
+public class User {
 
 	private String login;
 	private String password;
 	private String name;
-	
+    private boolean admin;
+
 	public String getLogin() {
 		return login;
 	}
@@ -25,6 +25,13 @@ public class Contact {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
+
 }

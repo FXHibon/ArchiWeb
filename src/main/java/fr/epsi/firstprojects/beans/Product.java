@@ -1,12 +1,12 @@
 package fr.epsi.firstprojects.beans;
 
-public class Utilisateur {
+
+public class Product {
 
 	private String login;
 	private String password;
 	private String name;
-	private boolean administrateur;
-
+	
 	public String getLogin() {
 		return login;
 	}
@@ -25,12 +25,4 @@ public class Utilisateur {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public boolean isAdministrateur() {
-		return administrateur;
-	}
-	public void setAdministrateur(boolean administrateur) {
-		this.administrateur = administrateur;
-	}
-
 }

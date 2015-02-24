@@ -13,26 +13,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import fr.epsi.firstprojects.beans.Utilisateur;
+import fr.epsi.firstprojects.beans.User;
 import fr.epsi.firstprojects.listeners.MyListener;
 
 @Controller
 public class ConnectController {
 
 	@RequestMapping(value="/connect", method=RequestMethod.POST)
-	public @ResponseBody String connect(@RequestBody Utilisateur utilisateur, HttpServletRequest request, HttpServletResponse httpServletResponse) {
-		String login = utilisateur.getLogin();
-		Logger.getRootLogger().info("login=" + login);
-		String password = utilisateur.getPassword();
-		Logger.getRootLogger().info("password=" + password);
+    public
+    @ResponseBody
+    String connect(@RequestBody User user, HttpServletRequest request, HttpServletResponse httpServletResponse) {
+        String login = user.getLogin();
+        Logger.getRootLogger().info("login=" + login);
+        String password = user.getPassword();
+        Logger.getRootLogger().info("password=" + password);
 
-		boolean authorized = true;
-		if (login == null || password == null || login.equals("") || password.equals("")) {
+        boolean authorized;
+        if (login == null || password == null || login.equals("") || password.equals("")) {
 			authorized = false;
 		} else {
 			authorized = false;
-			for (Utilisateur u : MyListener.getListOfUtilisateurs()) {
-				if (u.getLogin().equals(login)
+            for (User u : MyListener.getListOfUsers()) {
+                if (u.getLogin().equals(login)
 						&& u.getPassword().equals(password)) {
 					authorized = true;
 				}

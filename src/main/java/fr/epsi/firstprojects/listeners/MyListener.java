@@ -18,7 +18,7 @@ import javax.servlet.annotation.WebListener;
 
 import org.apache.log4j.Logger;
 
-import fr.epsi.firstprojects.beans.Utilisateur;
+import fr.epsi.firstprojects.beans.User;
 import fr.epsi.firstprojects.jmx.LoggerMBean;
 
 /**
@@ -39,30 +39,30 @@ public class MyListener implements ServletContextListener {
 		return con;
 	}
 
-	private static List<Utilisateur> listOfUtilisateurs;
+    private static List<User> listOfUsers;
 
-	public static List<Utilisateur> getListOfUtilisateurs() {
-		return listOfUtilisateurs;
-	}
+    public static List<User> getListOfUsers() {
+        return listOfUsers;
+    }
 
 	/**
 	 * Default constructor. 
 	 */
 	public MyListener() {
-		listOfUtilisateurs = new ArrayList<Utilisateur>();
-		Utilisateur utilisateur = new Utilisateur();
-		utilisateur.setLogin("ADMIN");
-		utilisateur.setPassword("admin");
-		utilisateur.setName("Administrateur");
-		utilisateur.setAdministrateur(true);
-		listOfUtilisateurs.add(utilisateur);
+        listOfUsers = new ArrayList<User>();
+        User user = new User();
+        user.setLogin("ADMIN");
+        user.setPassword("admin");
+        user.setName("Administrateur");
+        user.setAdmin(true);
+        listOfUsers.add(user);
 
-		utilisateur = new Utilisateur();
-		utilisateur.setLogin("USER");
-		utilisateur.setPassword("user");
-		utilisateur.setName("Utilisateur");
-		utilisateur.setAdministrateur(false);
-		listOfUtilisateurs.add(utilisateur);
+        user = new User();
+        user.setLogin("USER");
+        user.setPassword("user");
+        user.setName("Utilisateur");
+        user.setAdmin(false);
+        listOfUsers.add(user);
 
 	}
 
@@ -76,7 +76,7 @@ public class MyListener implements ServletContextListener {
 			conn.close();
 		} catch (Exception e) {
 			ok = false;
-			Logger.getRootLogger().error("Erreur lors de la connexion à la base de données",e);
+			Logger.getRootLogger().error("Erreur lors de la connexion ï¿½ la base de donnï¿½es",e);
 		}
 
 		MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
@@ -106,9 +106,9 @@ public class MyListener implements ServletContextListener {
 		}
 
 		if (ok) {
-			Logger.getRootLogger().error("Démarrage application OK");
+			Logger.getRootLogger().error("Dï¿½marrage application OK");
 		} else {
-			Logger.getRootLogger().error("L'application n'est pas démarrée correctement");
+			Logger.getRootLogger().error("L'application n'est pas dï¿½marrï¿½e correctement");
 		}
 	}
 
