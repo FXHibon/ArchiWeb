@@ -1,6 +1,6 @@
 <div layout="column">
     <div layout="row"
-         style="width:100%">
+         style="width:100%;">
             <md-icon md-svg-src="resources/search.svg" alt="search"
                      style="margin-top: 15px; margin-left: 5px; margin-right: 5px"></md-icon>
         <form name="searchForm">
@@ -12,36 +12,40 @@
         <md-icon md-svg-src="resources/sort.svg" alt="search"
                  style="margin-top: 15px; margin-left: 55px; margin-right: 5px"></md-icon>
         <md-select ng-model="sort" placeholder="title">
-            <md-option ng-value="opt" ng-repeat="opt in sortOption">{{ opt }}</md-option>
+            <md-option ng-value="opt" ng-repeat="opt in sortOption">{{opt}}</md-option>
         </md-select>
-</div>
-<md-list>
-    <md-item ng-repeat="product in products | filter:search | orderBy : sort : false">
-    <md-item-content>
-        <div layout="row" style="width: 100%;">
-            <div class="md-tile-left" flex="20">
-                <img ng-src="{{product.image}}" class="face" alt="{{product.title}}" width="75" height="75">
-            </div>
-            <div flex="5"></div>
-            <div class="md-tile-content" flex="50">
-                <h3>{{product.title}}</h3>
-                <h4>En stock: {{product.quantity}}</h4>
+        <md-button ng-click="onCLickReverseSort()" class="md-secondary md-fab" aria-label="swap"
+                   style="margin-top: 10px; margin-left: 15px; width: 40px; height: 40px;">
+            <md-icon md-svg-src="resources/swapVert.svg"></md-icon>
+        </md-button>
+    </div>
+    <md-list>
+        <md-item ng-repeat="product in products | filter:search | orderBy : sort : reverseSort">
+            <md-item-content>
+                <div layout="row" style="width: 100%;">
+                    <div class="md-tile-left" flex="20">
+                        <img ng-src="{{product.image}}" class="face" alt="{{product.title}}" width="75" height="75">
+                    </div>
+                    <div flex="5"></div>
+                    <div class="md-tile-content" flex="50">
+                        <h3>{{product.title}}</h3>
+                        <h4>En stock: {{product.quantity}}</h4>
 
-                <p>
-                    {{product.description}}
-                </p>
-            </div>
-            <div flex="25" style="margin-top: 15px;">
-                <md-button class="md-secondary md-fab" aria-label="more" style="margin-right: 15px;">
-                    <md-icon md-svg-src="resources/more.svg"></md-icon>
-                </md-button>
-                <md-button class="md-secondary md-fab" aria-label="order">
-                    <md-icon md-svg-src="resources/order.svg"></md-icon>
-                </md-button>
-            </div>
-        </div>
-    </md-item-content>
-    <md-divider md-inset ng-if="!$last"></md-divider>
-</md-item>
-</md-list>
+                        <p>
+                            {{product.description}}
+                        </p>
+                    </div>
+                    <div flex="25" style="margin-top: 15px;">
+                        <md-button class="md-secondary md-fab" aria-label="more" style="margin-right: 15px;">
+                            <md-icon md-svg-src="resources/more.svg"></md-icon>
+                        </md-button>
+                        <md-button class="md-secondary md-fab" aria-label="order">
+                            <md-icon md-svg-src="resources/order.svg"></md-icon>
+                        </md-button>
+                    </div>
+                </div>
+            </md-item-content>
+            <md-divider md-inset ng-if="!$last"></md-divider>
+        </md-item>
+    </md-list>
 </div>

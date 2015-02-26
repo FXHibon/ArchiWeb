@@ -1,15 +1,20 @@
-var productControllers = angular.module('productControllers', ['ngMaterial', 'ngMessages'])
+var productControllers = angular.module('productControllers', ['ngMaterial', 'ngMessages', 'productServices'])
     .config(function ($mdThemingProvider) {
         $mdThemingProvider.theme('default')
             .primaryPalette('teal')
             .accentPalette('green');
     });
 
-productControllers.controller('ConnectCtrl', function ($scope) {
+productControllers.controller('ConnectCtrl', function ($scope, productAppConnexion) {
     $scope.user = {
         pseudo: "",
         password: ""
     };
+    $scope.submit = function () {
+        productAppConnexion.connection($scope.user).success(function () {
+            alert("it's work");
+        });
+    }
 });
 
 productControllers.controller('ProductListCtrl', function ($scope) {
@@ -17,7 +22,11 @@ productControllers.controller('ProductListCtrl', function ($scope) {
     $scope.sortOption = [
         "title",
         "quantity"
-    ]
+    ];
+    $scope.reverseSort = false;
+    $scope.onCLickReverseSort = function () {
+        $scope.reverseSort = !$scope.reverseSort;
+    };
     $scope.products = [{
         title: "produit 1",
         quantity: "5",
