@@ -9,11 +9,11 @@ public class ProductServiceImpl extends SpringBeanAutowiringSupport
         implements ProductService {
 
     @Resource
-    private fr.epsi.firstprojects.services.ContactService productService;
+    private fr.epsi.firstprojects.services.ProductService productService;
 
     @Override
     public Product getProduct(String id) {
-        return productService.getContact(id);
+        return productService.getProduct(id);
     }
 
 }

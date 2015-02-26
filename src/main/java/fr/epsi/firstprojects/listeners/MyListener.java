@@ -54,14 +54,12 @@ public class MyListener implements ServletContextListener {
         user.setLogin("ADMIN");
         user.setPassword("admin");
         user.setName("Administrateur");
-        user.setAdmin(true);
         listOfUsers.add(user);
 
         user = new User();
         user.setLogin("USER");
         user.setPassword("user");
         user.setName("Utilisateur");
-        user.setAdmin(false);
         listOfUsers.add(user);
 
 	}

@@ -6,8 +6,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,12 +13,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import fr.epsi.firstprojects.beans.Product;
-import fr.epsi.firstprojects.services.ContactService;
+import fr.epsi.firstprojects.services.ProductService;
 
 public class ContactController {
 
     @Resource
-    private ContactService contactService;
+    private ProductService productService;
 
 	@RequestMapping(value="/contact", method=RequestMethod.GET)
     public
@@ -43,7 +41,7 @@ public class ContactController {
 			String tokenRecu = httpServletRequest.getParameter("token");
 
 			if (token.equals(tokenRecu)) {
-                return contactService.getContacts();
+                return productService.getProducts();
             } else {
 				httpServletResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 			}
@@ -55,7 +53,7 @@ public class ContactController {
     public
     @ResponseBody
     Product getContact(@PathVariable("id") String id, HttpServletResponse httpServletResponse) {
-        Product product = contactService.getContact(id);
+        Product product = productService.getProduct(id);
         if (product == null) {
             httpServletResponse.setStatus(HttpServletResponse.SC_NOT_FOUND);
 		}
@@ -66,10 +64,10 @@ public class ContactController {
 	public void setContact(@PathVariable("id") String id, 
 			@PathVariable("name") String name, 
 			HttpServletResponse httpServletResponse) {
-        Product product = contactService.getContact(id);
+        Product product = productService.getProduct(id);
         if (product != null) {
             product.setName(name);
-            contactService.updateContact(product);
+            productService.updateProduct(product);
         } else {
 			httpServletResponse.setStatus(HttpServletResponse.SC_NOT_FOUND);
 		}

@@ -16,5 +16,4 @@
 
     </jaxws:server>
     <bean id="product" class="fr.epsi.firstprojects.controllers.soap.ProductServiceImpl"/>
-    <bean id="contactService" class="fr.epsi.firstprojects.services.impl.ContactServiceImpl"/>
 </beans>
