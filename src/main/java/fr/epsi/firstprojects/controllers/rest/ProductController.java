@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -23,7 +24,7 @@ public class ProductController {
     @RequestMapping(value = "/product", method = RequestMethod.GET)
     public
     @ResponseBody
-    List<Product> getContacts(
+    List<Product> getProducts(
             HttpServletRequest httpServletRequest,
             HttpServletResponse httpServletResponse) {
 
@@ -36,11 +37,23 @@ public class ProductController {
     }
 
     private boolean tokenValid(HttpServletRequest httpServletRequest) {
-        return connectionService.isConnected(httpServletRequest.getParameter("token"));
+        String tokenVal = "";
+        for (Cookie cookie : httpServletRequest.getCookies()) {
+            if (cookie.getName().equals("token")) {
+                tokenVal = cookie.getValue();
+                break;
+            }
+        }
+        return connectionService.isConnected(tokenVal);
     }
 
     private boolean tokenPresent(HttpServletRequest httpServletRequest) {
-        return httpServletRequest.getParameter("token") == null;
+        for (Cookie cookie : httpServletRequest.getCookies()) {
+            if (cookie.getName().equals("token")) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @RequestMapping(value = "/product/{id}", method = RequestMethod.GET)

@@ -64,8 +64,8 @@ public class DbListener implements ServletContextListener {
 			conn.close();
 		} catch (Exception e) {
 			ok = false;
-			Logger.getRootLogger().error("Erreur lors de la connexion � la base de donn�es",e);
-		}
+            Logger.getRootLogger().error("Erreur lors de la connexion à la base de données", e);
+        }
 
 		MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
 		ObjectName name = null;
@@ -94,11 +94,11 @@ public class DbListener implements ServletContextListener {
 		}
 
 		if (ok) {
-			Logger.getRootLogger().error("D�marrage application OK");
-		} else {
-			Logger.getRootLogger().error("L'application n'est pas d�marr�e correctement");
-		}
-	}
+            Logger.getRootLogger().error("Démarrage application OK");
+        } else {
+            Logger.getRootLogger().error("L'application n'est pas démarrée correctement");
+        }
+    }
 
 	/**
 	 * @see ServletContextListener#contextDestroyed(ServletContextEvent)
