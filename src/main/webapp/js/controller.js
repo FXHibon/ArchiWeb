@@ -1,17 +1,18 @@
-var productControllers = angular.module('productControllers', ['ngMaterial', 'ngMessages']);
+var productControllers = angular.module('productControllers', ['ngMaterial', 'ngMessages'])
+    .config(function ($mdThemingProvider) {
+        $mdThemingProvider.theme('default')
+            .primaryPalette('teal')
+            .accentPalette('green');
+    });
 
 productControllers.controller('ConnectCtrl', function ($scope) {
     $scope.user = {
         pseudo: "",
         password: ""
     };
-}).config(function ($mdThemingProvider) {
-    $mdThemingProvider.theme('default')
-        .primaryPalette('teal')
-        .accentPalette('green');
 });
 
-productControllers.controller('ProductDetailCtrl', function ($scope) {
+productControllers.controller('ProductListCtrl', function ($scope) {
     $scope.search = "";
     $scope.products = [{
         title: "produit 1",
@@ -61,13 +62,9 @@ productControllers.controller('ProductDetailCtrl', function ($scope) {
             image: "",
             description: "le produit 2 il est mieu..."
         }];
-}).config(function ($mdThemingProvider) {
-    $mdThemingProvider.theme('default')
-        .primaryPalette('teal')
-        .accentPalette('green');
 });
 
-productControllers.controller('ProductListCtrl', function ($scope) {
+productControllers.controller('ProductDetailCtrl', function ($scope) {
     $scope.tab = {
         selectedIndex: 0
     };
@@ -77,4 +74,4 @@ productControllers.controller('ProductListCtrl', function ($scope) {
     $scope.previous = function () {
         $scope.v.selectedIndex = Math.max($scope.tab.selectedIndex - 1, 0);
     };
-})
+});
