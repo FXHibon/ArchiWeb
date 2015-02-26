@@ -9,4 +9,8 @@
     <mvc:annotation-driven/>
     <context:component-scan base-package="fr.epsi.firstprojects"/>
 
+    <bean id="productService" name="productService" class="fr.epsi.firstprojects.services.impl.ProductServiceImpl"/>
+    <bean id="connectionService" name="connectionService"
+          class="fr.epsi.firstprojects.services.impl.ConnectionServiceImpl"/>
+
 </beans>

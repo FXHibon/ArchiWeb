@@ -1,18 +1,13 @@
 package fr.epsi.firstprojects.services.impl;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-
+import fr.epsi.firstprojects.beans.Product;
+import fr.epsi.firstprojects.listeners.DbListener;
+import fr.epsi.firstprojects.services.ProductService;
 import org.apache.log4j.Logger;
 
-import fr.epsi.firstprojects.beans.Product;
-import fr.epsi.firstprojects.listeners.MyListener;
-import fr.epsi.firstprojects.services.ProductService;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProductServiceImpl implements ProductService {
 
@@ -25,11 +20,12 @@ public class ProductServiceImpl implements ProductService {
             String request = "SELECT * FROM PRODUCTS";
 
 			try {
-				Statement stmt = MyListener.getConnection().createStatement();
+                Statement stmt = DbListener.getConnection().createStatement();
                 results = stmt.executeQuery(request);
 
                 while (results.next()) {
                     Product product = new Product();
+                    product.setId(results.getString("id"));
                     product.setName(results.getString("name"));
                     product.setDescription(results.getString("description"));
                     product.setAmount(results.getInt("amount"));
@@ -39,9 +35,9 @@ public class ProductServiceImpl implements ProductService {
                 }
 
                 results.close();
-                MyListener.getConnection().close();
-				
-			} catch (SQLException e) {
+                DbListener.getConnection().close();
+
+            } catch (SQLException e) {
 				e.printStackTrace();
 			}			
 		} catch (Exception e) {
@@ -54,13 +50,14 @@ public class ProductServiceImpl implements ProductService {
 	@Override
     public boolean addProduct(Product product) {
         try {
-			Connection conn = MyListener.getConnection();
+            Connection conn = DbListener.getConnection();
             PreparedStatement insertStatement = conn
-                    .prepareStatement("INSERT INTO PRODUCTS VALUES (?, ?, ?, ?)");
+                    .prepareStatement("INSERT INTO PRODUCTS VALUES (?, ?, ?, ?, ?)");
             insertStatement.setString(1, product.getName());
-            insertStatement.setString(2, product.getDescription());
-            insertStatement.setInt(3, product.getAmount());
-            insertStatement.setString(4, product.getImage());
+            insertStatement.setString(2, product.getId());
+            insertStatement.setString(3, product.getDescription());
+            insertStatement.setInt(4, product.getAmount());
+            insertStatement.setString(5, product.getImage());
             insertStatement.execute();
             conn.close();
 			
@@ -74,13 +71,14 @@ public class ProductServiceImpl implements ProductService {
 	@Override
     public boolean updateProduct(Product product) {
         try {
-			Connection conn = MyListener.getConnection();
-			PreparedStatement stmt = conn
-                    .prepareStatement("UPDATE PRODUCTS SET NAME=?, DESCRIPTION=?, AMOUNT=?, IMAGE=? WHERE NAME=?");
+            Connection conn = DbListener.getConnection();
+            PreparedStatement stmt = conn
+                    .prepareStatement("UPDATE PRODUCTS SET NAME=?, DESCRIPTION=?, AMOUNT=?, IMAGE=? WHERE ID=?");
             stmt.setString(1, product.getName());
             stmt.setString(2, product.getDescription());
             stmt.setInt(3, product.getAmount());
             stmt.setString(4, product.getImage());
+            stmt.setString(5, product.getId());
             stmt.executeUpdate();
 			conn.close();
 			return true;
@@ -94,10 +92,10 @@ public class ProductServiceImpl implements ProductService {
 	@Override
     public boolean deleteProduct(Product product) {
         try {
-			Connection conn = MyListener.getConnection();
-			PreparedStatement stmt = conn
-                    .prepareStatement("DELETE FROM PRODUCTS WHERE NAME=?");
-            stmt.setString(1, product.getName());
+            Connection conn = DbListener.getConnection();
+            PreparedStatement stmt = conn
+                    .prepareStatement("DELETE FROM PRODUCTS WHERE ID=?");
+            stmt.setString(1, product.getId());
             stmt.executeUpdate();
 			conn.close();
 			
@@ -116,13 +114,14 @@ public class ProductServiceImpl implements ProductService {
             ResultSet results = null;
 
 			try {
-				Connection conn = MyListener.getConnection();
-				PreparedStatement stmt = conn
-                        .prepareStatement("SELECT * FROM USERS WHERE NAME=?");
+                Connection conn = DbListener.getConnection();
+                PreparedStatement stmt = conn
+                        .prepareStatement("SELECT * FROM USERS WHERE ID=?");
                 stmt.setString(1, id);
                 results = stmt.executeQuery();
                 if (results.next()) {
                     product = new Product();
+                    product.setId(results.getString("id"));
                     product.setName(results.getString("name"));
                     product.setDescription(results.getString("description"));
                     product.setAmount(results.getInt("amount"));
@@ -130,9 +129,9 @@ public class ProductServiceImpl implements ProductService {
                 }
 
                 results.close();
-                MyListener.getConnection().close();
-				
-			} catch (SQLException e) {
+                DbListener.getConnection().close();
+
+            } catch (SQLException e) {
 				e.printStackTrace();
 			}			
 		} catch (Exception e) {

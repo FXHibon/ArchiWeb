@@ -4,7 +4,6 @@ public class User {
 
 	private String login;
 	private String password;
-	private String name;
 
     public User() {
     }
@@ -25,11 +24,4 @@ public class User {
         this.password = password;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }

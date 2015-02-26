@@ -1,32 +1,25 @@
 package fr.epsi.firstprojects.listeners;
 
+import fr.epsi.firstprojects.beans.User;
+import fr.epsi.firstprojects.jmx.LoggerMBean;
+import org.apache.log4j.Logger;
+
+import javax.management.*;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+import javax.servlet.annotation.WebListener;
 import java.lang.management.ManagementFactory;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.management.InstanceAlreadyExistsException;
-import javax.management.MBeanRegistrationException;
-import javax.management.MBeanServer;
-import javax.management.MalformedObjectNameException;
-import javax.management.NotCompliantMBeanException;
-import javax.management.ObjectName;
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
-import javax.servlet.annotation.WebListener;
-
-import org.apache.log4j.Logger;
-
-import fr.epsi.firstprojects.beans.User;
-import fr.epsi.firstprojects.jmx.LoggerMBean;
-
 /**
- * Application Lifecycle Listener implementation class MyListener
+ * Application Lifecycle Listener implementation class
  *
  */
 @WebListener
-public class MyListener implements ServletContextListener {
+public class DbListener implements ServletContextListener {
 
 	private final static String dbDriver = "org.hsqldb.jdbcDriver";
 	private final static String dbUrl = "jdbc:hsqldb:hsql://localhost:9003";
@@ -35,9 +28,8 @@ public class MyListener implements ServletContextListener {
 
 	public static Connection getConnection() throws Exception {
 		Class.forName(dbDriver);
-		Connection con = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
-		return con;
-	}
+        return DriverManager.getConnection(dbUrl, dbUser, dbPassword);
+    }
 
     private static List<User> listOfUsers;
 
@@ -48,18 +40,16 @@ public class MyListener implements ServletContextListener {
 	/**
 	 * Default constructor. 
 	 */
-	public MyListener() {
+    public DbListener() {
         listOfUsers = new ArrayList<User>();
         User user = new User();
         user.setLogin("ADMIN");
         user.setPassword("admin");
-        user.setName("Administrateur");
         listOfUsers.add(user);
 
         user = new User();
         user.setLogin("USER");
         user.setPassword("user");
-        user.setName("Utilisateur");
         listOfUsers.add(user);
 
 	}
