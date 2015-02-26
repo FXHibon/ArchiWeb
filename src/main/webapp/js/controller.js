@@ -14,6 +14,10 @@ productControllers.controller('ConnectCtrl', function ($scope) {
 
 productControllers.controller('ProductListCtrl', function ($scope) {
     $scope.search = "";
+    $scope.sortOption = [
+        "title",
+        "quantity"
+    ]
     $scope.products = [{
         title: "produit 1",
         quantity: "5",
@@ -22,12 +26,12 @@ productControllers.controller('ProductListCtrl', function ($scope) {
     },
         {
             title: "produit 2",
-            quantity: "8",
+            quantity: "55",
             image: "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTVupgjmRolJ0JRmSSVFO3PasVcYvB7_gbdxcCQ52_yQgftQ-aHOHUr3b6k",
             description: "le produit 2 il est mieu..."
         },
         {
-            title: "produit 2",
+            title: "aroduit 2",
             quantity: "8",
             image: "",
             description: "le produit 2 il est mieu..."
@@ -45,8 +49,8 @@ productControllers.controller('ProductListCtrl', function ($scope) {
             description: "le produit 2 il est mieu..."
         },
         {
-            title: "produit 2",
-            quantity: "8",
+            title: "aaaroduit 2",
+            quantity: "1",
             image: "",
             description: "le produit 2 il est mieu..."
         },

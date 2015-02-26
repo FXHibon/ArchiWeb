@@ -12,11 +12,11 @@ productApp.config(['$routeProvider',
             }).
             when('/product', {
                 templateUrl: 'view/product-list.html',
-                controller: 'ProductDetailCtrl'
+                controller: 'ProductListCtrl'
             }).
             when('/product/:productId', {
                 templateUrl: 'view/product-detail.html',
-                controller: 'ProductListCtrl'
+                controller: 'ProductDetailCtrl'
             }).
             otherwise({
                 redirectTo: '/connection'
