@@ -1,21 +1,22 @@
-<!--<div layout="column">
+<div layout="column">
     <div layout="row"
          style="width:100%">
-        <div>
             <md-icon md-svg-src="resources/search.svg" alt="search"
-                     style="margin-top: 4px; margin-left: 5px; margin-right: 5px"></md-icon>
-        </div>
-        <div>-->
-<form name="searchForm">
-    <md-input-container>
-        <label>Search</label>
-        <input type="search" ng-model="search">
-    </md-input-container>
-</form>
-<!--</div>
+                     style="margin-top: 15px; margin-left: 5px; margin-right: 5px"></md-icon>
+        <form name="searchForm">
+            <md-input-container>
+                <label>Search</label>
+                <input type="text" ng-model="search">
+            </md-input-container>
+        </form>
+        <md-icon md-svg-src="resources/sort.svg" alt="search"
+                 style="margin-top: 15px; margin-left: 55px; margin-right: 5px"></md-icon>
+        <md-select ng-model="sort" placeholder="title">
+            <md-option ng-value="opt" ng-repeat="opt in sortOption">{{ opt }}</md-option>
+        </md-select>
 </div>
 <md-list>
-<md-item ng-repeat="product in products">
+    <md-item ng-repeat="product in products | filter:search | orderBy : sort : false">
     <md-item-content>
         <div layout="row" style="width: 100%;">
             <div class="md-tile-left" flex="20">
@@ -30,7 +31,7 @@
                     {{product.description}}
                 </p>
             </div>
-            <div flex="25">
+            <div flex="25" style="margin-top: 15px;">
                 <md-button class="md-secondary md-fab" aria-label="more" style="margin-right: 15px;">
                     <md-icon md-svg-src="resources/more.svg"></md-icon>
                 </md-button>
@@ -43,4 +44,4 @@
     <md-divider md-inset ng-if="!$last"></md-divider>
 </md-item>
 </md-list>
-</div>-->
+</div>
