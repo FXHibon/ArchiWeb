@@ -47,5 +47,5 @@ productControllers.controller('ProductDetailCtrl', function ($scope, $routeParam
         $scope.v.selectedIndex = Math.max($scope.tab.selectedIndex - 1, 0);
     };
     $scope.productId = $routeParams.productId;
-    $scope.product = Product.get($scope.productId);
+    $scope.product = Product.get({id: $scope.productId});
 });
