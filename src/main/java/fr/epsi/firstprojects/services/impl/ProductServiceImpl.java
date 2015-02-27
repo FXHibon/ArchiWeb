@@ -116,7 +116,7 @@ public class ProductServiceImpl implements ProductService {
 			try {
                 Connection conn = DbListener.getConnection();
                 PreparedStatement stmt = conn
-                        .prepareStatement("SELECT * FROM USERS WHERE ID=?");
+                        .prepareStatement("SELECT * FROM PRODUCTS WHERE ID=?");
                 stmt.setString(1, id);
                 results = stmt.executeQuery();
                 if (results.next()) {

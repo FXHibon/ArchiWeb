@@ -21,7 +21,7 @@ public class ProductController {
     @Resource
     private ConnectionService connectionService;
 
-    @RequestMapping(value = "/product", method = RequestMethod.GET)
+    @RequestMapping(value = "/products", method = RequestMethod.GET)
     public
     @ResponseBody
     List<Product> getProducts(
