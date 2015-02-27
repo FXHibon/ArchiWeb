@@ -14,13 +14,14 @@ productServices.factory('productAppConnexion', function ($http) {
     };
 });
 
-productServices.factory('Product', ['$resource', function ($resource) {
-    return $resource('rest/product/:id', null);
-}]);
+productServices.factory('Product', ['$resource',
+    function ($resource) {
+        return $resource('rest/product/:id', null);
+    }]);
 
 productServices.factory('Products', ['$resource',
         function ($resource) {
-            return $resource('rest/product', {}, {
+            return $resource('rest/products', {}, {
                 query: {method: 'GET', isArray: true}
             });
         }]

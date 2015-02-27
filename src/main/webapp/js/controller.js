@@ -10,10 +10,21 @@ productControllers.controller('ConnectCtrl', function ($scope, $location, produc
         pseudo: "",
         password: ""
     };
+    $scope.requeting = false;
+
+    $scope.errors = {};
+
     $scope.submit = function () {
-        productAppConnexion.connection($scope.user).success(function () {
-            $location.path('product')
-        });
+        $scope.requeting = true;
+        $scope.errors = {};
+        productAppConnexion.connection($scope.user)
+            .success(function () {
+                $location.path('product')
+            })
+            .error(function () {
+                $scope.requeting = false;
+                $scope.errors.unauthorized = true;
+            });
     }
 });
 

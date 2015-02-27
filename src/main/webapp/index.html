@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app="productApp">
+<html lang="en">
 <head>
     <title>Product app</title>
 
@@ -23,18 +23,14 @@
     <!-- css perso -->
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
-<body>
+<body ng-app="productApp">
 
-<div layout="column" style="padding-bottom: 15px; width:800px; z-index:1;" class="md-whiteframe-z2 base-container">
-    <md-toolbar>
-        <div class="md-toolbar-tools">
-            <span class="md-flex">Product App</span>
-        </div>
-    </md-toolbar>
-    <md-content class="md-padding" style="height: 600px;padding: 24px;">
-        <!--<md-progress-linear class="md-accent progress-container" md-mode="" value=""></md-progress-linear>-->
-        <div ng-view style="height: 100%;"></div>
-    </md-content>
-</div>
+<md-toolbar>
+    <div class="md-toolbar-tools">
+        <span>Product App</span>
+    </div>
+</md-toolbar>
+<md-content ng-view layout="row" layout-align="center center">
+</md-content>
 </body>
 </html>
