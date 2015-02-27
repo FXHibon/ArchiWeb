@@ -15,7 +15,7 @@ productServices.factory('productAppConnexion', function ($http) {
 });
 
 productServices.factory('Product', ['$resource', function ($resource) {
-    return $resource('rest/product/:id', null);
+    return $resource('rest/product/:id', null, {query: {isArray: true}});
 }]);
 
 productServices.factory('Products', ['$resource',
