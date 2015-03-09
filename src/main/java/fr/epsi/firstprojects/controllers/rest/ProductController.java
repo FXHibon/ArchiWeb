@@ -28,32 +28,7 @@ public class ProductController {
             HttpServletRequest httpServletRequest,
             HttpServletResponse httpServletResponse) {
 
-        if (tokenPresent(httpServletRequest) && tokenValid(httpServletRequest)) {
-            return productService.getProducts();
-        } else {
-            httpServletResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        }
-        return null;
-    }
-
-    private boolean tokenValid(HttpServletRequest httpServletRequest) {
-        String tokenVal = "";
-        for (Cookie cookie : httpServletRequest.getCookies()) {
-            if (cookie.getName().equals("token")) {
-                tokenVal = cookie.getValue();
-                break;
-            }
-        }
-        return connectionService.isConnected(tokenVal);
-    }
-
-    private boolean tokenPresent(HttpServletRequest httpServletRequest) {
-        for (Cookie cookie : httpServletRequest.getCookies()) {
-            if (cookie.getName().equals("token")) {
-                return true;
-            }
-        }
-        return false;
+        return productService.getProducts();
     }
 
     @RequestMapping(value = "/products/{id}", method = RequestMethod.GET)
@@ -61,45 +36,40 @@ public class ProductController {
     @ResponseBody
     Product getProduct(@PathVariable("id") String id, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
 
-        if (tokenPresent(httpServletRequest) && tokenValid(httpServletRequest)) {
-            Product product = productService.getProduct(id);
-            if (product == null) {
-                httpServletResponse.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            } else {
-                return product;
-            }
+        Product product = productService.getProduct(id);
+        if (product == null) {
+            httpServletResponse.setStatus(HttpServletResponse.SC_NOT_FOUND);
         } else {
-            httpServletResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return product;
         }
         return null;
     }
 
     @RequestMapping(value = "/products/{id}", method = RequestMethod.POST)
-    public void setProduct(@PathVariable("id") String id,
+    public Product setProduct(@PathVariable("id") String id,
                            @RequestBody Product product,
                            HttpServletRequest httpServletRequest,
                            HttpServletResponse httpServletResponse) {
 
         int httpCode;
 
-        if (tokenPresent(httpServletRequest) && tokenValid(httpServletRequest)) {
-            if (product != null) {
-                try {
-                    productService.updateProduct(product);
-                    httpServletResponse.setStatus(HttpServletResponse.SC_OK);
-                } catch (Exception e) {
-
-                }
-            } else {
-                httpServletResponse.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        if (product != null) {
+            try {
+                productService.updateProduct(product);
+                httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+                return product;
+            } catch (Exception e) {
+                httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                return null;
             }
+        } else {
+            httpServletResponse.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return null;
         }
     }
 
     @RequestMapping(value = "/products/{id}", method = RequestMethod.DELETE)
     public void deleteDelete(@PathVariable String id, HttpServletRequest httpServletRequest) {
-        if (tokenPresent(httpServletRequest) && tokenValid(httpServletRequest)) {
-            productService.deleteProduct(id);
-        }
+        productService.deleteProduct(id);
     }
 }

@@ -72,7 +72,10 @@ productControllers.controller('ProductDetailCtrl', ['$scope', '$routeParams', 'P
 
             $scope.order = function (queryAmount) {
                 $scope.product.amount -= queryAmount;
-                Product.save({id: $scope.productId}, $scope.product);
+                Product.save({id: $scope.productId}, $scope.product)
+                    .then(function (product) {
+                        $scope.product = product;
+                    });
             }
         }]
 );
