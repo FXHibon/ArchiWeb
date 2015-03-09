@@ -38,7 +38,6 @@ productControllers.controller('ProductListCtrl', ['$scope', '$location', 'Produc
                 "amount"
             ];
 
-            $scope.sort = $scope.sortOption[0];
             $scope.reverse = false;
 
             $scope.reverseSort = function () {
