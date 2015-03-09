@@ -1,36 +1,44 @@
-<md-card layout layout="column">
+<md-toolbar>
+    <div class="md-toolbar-tools" layout="row">
+        <div class="md-toolbar-tools" layout="row">
+            <span>Product App</span>
+        </div>
+    </div>
+</md-toolbar>
+<div layout="column" layout-align="start center" class="connect-view">
+    <md-card layout layout="column">
+        <md-toolbar>
+            <h4 class="md-toolbar-tools"><span>Sign In</span></h4>
+        </md-toolbar>
 
-    <md-toolbar>
-        <h4 class="md-toolbar-tools"><span>Sign In</span></h4>
-    </md-toolbar>
+        <md-card-content class="connect-panel" layout-align="center center">
+            <form name="userForm" class="connect-panel-form">
+                <div layout="column">
 
-    <md-card-content>
-        <form name="userForm">
-            <div layout="column">
+                    <md-input-container layout="column">
+                        <label>Pseudo</label>
+                        <input type="text" ng-model="user.login">
+                    </md-input-container>
 
-                <md-input-container layout="column">
-                    <label>Pseudo</label>
-                    <input type="text" ng-model="user.login">
-                </md-input-container>
+                    <md-input-container layout="column">
+                        <label>Password</label>
+                        <input type="password" ng-model="user.password">
+                    </md-input-container>
 
-                <md-input-container layout="column">
-                    <label>Password</label>
-                    <input type="password" ng-model="user.password">
-                </md-input-container>
+                    <md-button class="md-raised md-primary" ng-click="submit()">Connection</md-button>
 
-                <md-button class="md-raised md-primary" ng-click="submit()">Connection</md-button>
+                    <md-input-container layout="column">
+                        <div ng-messages="errors" layout-align="center center">
+                            <div ng-message="unauthorized">Connection failed</div>
+                        </div>
+                    </md-input-container>
 
-                <md-input-container layout="column">
-                    <div ng-messages="errors" layout-align="center center">
-                        <div ng-message="unauthorized">Connection failed</div>
+                    <div layout="column" layout-align="center center" ng-show="requeting">
+                        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
                     </div>
-                </md-input-container>
 
-                <div layout="column" layout-align="center center" ng-show="requeting">
-                    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
                 </div>
-
-            </div>
-        </form>
-    </md-card-content>
-</md-card>
+            </form>
+        </md-card-content>
+    </md-card>
+</div>
