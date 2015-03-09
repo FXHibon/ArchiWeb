@@ -21,4 +21,5 @@ productApp.config(['$routeProvider',
             otherwise({
                 redirectTo: '/connection'
             });
-    }]);
+    }]
+);

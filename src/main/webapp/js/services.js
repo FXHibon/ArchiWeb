@@ -6,17 +6,14 @@ var productServices = angular.module('productServices', ['ngResource']);
 productServices.factory('productAppConnexion', function ($http) {
     return {
         connection: function (user) {
-            return $http.post('rest/connect', {
-                login: user.pseudo,
-                password: user.password
-            });
+            return $http.post('rest/connect', user);
         }
     };
 });
 
 productServices.factory('Product', ['$resource',
     function ($resource) {
-        return $resource('rest/product/:id', null);
+        return $resource('rest/product/:id');
     }]);
 
 productServices.factory('Products', ['$resource',
