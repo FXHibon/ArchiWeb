@@ -8,7 +8,7 @@
         </md-input-container>
         <md-icon md-svg-src="resources/sort.svg" alt="search"></md-icon>
         <md-select ng-model="sort" placeholder="name">
-            <md-option ng-value="opt" ng-repeat="opt in sortOption">{{opt}}</md-option>
+            <md-option ng-repeat="opt in sortOption">{{opt}}</md-option>
         </md-select>
         <md-button ng-click="reverseSort()" class="md-secondary md-fab" aria-label="swap">
             <md-icon md-svg-src="resources/swapVert.svg"></md-icon>

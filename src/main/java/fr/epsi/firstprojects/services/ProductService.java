@@ -14,5 +14,5 @@ public interface ProductService {
 
     public boolean updateProduct(Product product);
 
-    public boolean deleteProduct(Product product);
+    public boolean deleteProduct(String product);
 }

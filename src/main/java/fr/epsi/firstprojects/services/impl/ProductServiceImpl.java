@@ -90,12 +90,12 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-    public boolean deleteProduct(Product product) {
+    public boolean deleteProduct(String id) {
         try {
             Connection conn = DbListener.getConnection();
             PreparedStatement stmt = conn
                     .prepareStatement("DELETE FROM PRODUCTS WHERE ID=?");
-            stmt.setString(1, product.getId());
+            stmt.setString(1, id);
             stmt.executeUpdate();
 			conn.close();
 			

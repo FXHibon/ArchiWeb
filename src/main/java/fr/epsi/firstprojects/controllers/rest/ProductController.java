@@ -56,7 +56,7 @@ public class ProductController {
         return false;
     }
 
-    @RequestMapping(value = "/product/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/products/{id}", method = RequestMethod.GET)
     public
     @ResponseBody
     Product getProduct(@PathVariable("id") String id, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
@@ -74,24 +74,32 @@ public class ProductController {
         return null;
     }
 
-    @RequestMapping(value = "/product", method = RequestMethod.POST)
-    public void setContact(@PathVariable("id") String id,
+    @RequestMapping(value = "/products/{id}", method = RequestMethod.POST)
+    public void setProduct(@PathVariable("id") String id,
                            @RequestBody Product product,
                            HttpServletRequest httpServletRequest,
                            HttpServletResponse httpServletResponse) {
+
+        int httpCode;
+
         if (tokenPresent(httpServletRequest) && tokenValid(httpServletRequest)) {
             if (product != null) {
-                productService.updateProduct(product);
+                try {
+                    productService.updateProduct(product);
+                    httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+                } catch (Exception e) {
+
+                }
             } else {
                 httpServletResponse.setStatus(HttpServletResponse.SC_NOT_FOUND);
             }
         }
     }
 
-    @RequestMapping(value = "/product", method = RequestMethod.DELETE)
-    public void deleteContact(@RequestBody Product product, HttpServletRequest httpServletRequest) {
+    @RequestMapping(value = "/products/{id}", method = RequestMethod.DELETE)
+    public void deleteDelete(@PathVariable String id, HttpServletRequest httpServletRequest) {
         if (tokenPresent(httpServletRequest) && tokenValid(httpServletRequest)) {
-            productService.deleteProduct(product);
+            productService.deleteProduct(id);
         }
     }
 }

@@ -13,7 +13,7 @@ productServices.factory('productAppConnexion', function ($http) {
 
 productServices.factory('Product', ['$resource',
     function ($resource) {
-        return $resource('rest/product/:id');
+        return $resource('rest/products/:id');
     }]);
 
 productServices.factory('Products', ['$resource',

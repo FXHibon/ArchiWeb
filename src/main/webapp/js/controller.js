@@ -58,13 +58,22 @@ productControllers.controller('ProductDetailCtrl', ['$scope', '$routeParams', 'P
             $scope.tab = {
                 selectedIndex: 0
             };
+
             $scope.next = function () {
                 $scope.tab.selectedIndex = Math.min($scope.tab.selectedIndex + 1, 2);
             };
+
             $scope.previous = function () {
                 $scope.v.selectedIndex = Math.max($scope.tab.selectedIndex - 1, 0);
             };
+
             $scope.productId = $routeParams.productId;
+
             $scope.product = Product.get({id: $scope.productId});
+
+            $scope.order = function (queryAmount) {
+                $scope.product.amount -= queryAmount;
+                Product.save({id: $scope.productId}, $scope.product);
+            }
         }]
 );

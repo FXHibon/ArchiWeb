@@ -14,10 +14,6 @@
     height: 100%;
 }
 
-.tabsdemoStaticTabs .sample {
-    height: 450px;
-}
-
 .tabsdemoStaticTabs #tab1-content {
     background-color: #3F51B5;
 }
@@ -98,10 +94,6 @@
 
 .tabsdemoStaticTabs md-tabs .md-paginator {
     color: white;
-}
-
-.tabsdemoDynamicTabs .sample {
-    height: 500px;
 }
 
 .tabsdemoDynamicTabs .remove-tab {

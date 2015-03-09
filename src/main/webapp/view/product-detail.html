@@ -1,19 +1,32 @@
-<div class="sample" layout="column">
+<div class="sample" layout="column" layout-fill layout-align="center center">
     <md-tabs md-selected="selectedIndex" flex>
+
         <md-tab label="Product Detail">
-            <div class="demo-tab" layout="column" layout-align="space-around center">
-                {{product.id}}<br/>
-                {{product.name}}<br/>
-                {{product.description}}<br/>
-                View for product detail #1<br/>
-                data.selectedIndex = 0
-            </div>
+            <md-card class="demo-tab" layout="column" layout-align="space-around center">
+                <p>{{ product.name }}</p>
+
+                <p>{{ product.image }}</p>
+
+                <p>{{ product.description }}</p>
+
+                <p>{{ product.amount }}</p>
+            </md-card>
         </md-tab>
-        <md-tab label="Order">
-            <div class="demo-tab" layout="column" layout-align="space-around center">
-                View for order<br/>
-                data.selectedIndex = 1
-            </div>
+
+        <md-tab label="Shop">
+            <md-card class="demo-tab" layout="column" layout-align="space-around center">
+                <form name="orderForm">
+                    <md-input-container>
+                        <label for="amount-input">Amount</label>
+                        <input id="amount-input" ng-model="queryAmount" type="number" min="1" max="{{ product.amount }}"
+                               required="">
+                    </md-input-container>
+                    <md-input-container>
+                        <md-button class="md-raised md-primary" ng-click="order(queryAmount)">Order</md-button>
+                    </md-input-container>
+                </form>
+            </md-card>
         </md-tab>
+
     </md-tabs>
 </div>

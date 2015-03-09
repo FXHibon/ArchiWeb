@@ -3,6 +3,7 @@ package fr.epsi.firstprojects.controllers.rest;
 import fr.epsi.firstprojects.beans.User;
 import fr.epsi.firstprojects.listeners.DbListener;
 import fr.epsi.firstprojects.services.ConnectionService;
+import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -20,13 +21,17 @@ import java.util.UUID;
 @Controller
 public class ConnectController {
 
+    Logger logger = Logger.getLogger(ConnectController.class);
+
     @Resource
     ConnectionService connectionService;
 
 	@RequestMapping(value="/connect", method=RequestMethod.POST)
     public
     @ResponseBody
-    ResponseEntity connect(@RequestBody User user, HttpServletRequest request, HttpServletResponse httpServletResponse) {
+    void connect(@RequestBody User user, HttpServletRequest request, HttpServletResponse httpServletResponse) {
+
+        logger.info("connection requested");
 
         String login = user.getLogin();
         String password = user.getPassword();
@@ -45,13 +50,12 @@ public class ConnectController {
 
 		if (authorized) {
 			String tokenValue = UUID.randomUUID().toString();
-            httpServletResponse.addCookie(new Cookie("token", tokenValue));
+            request.getSession(true).setAttribute("token", tokenValue);
             connectionService.login(tokenValue, user);
-            return new ResponseEntity(null, HttpStatus.OK);
+            httpServletResponse.setStatus(HttpServletResponse.SC_OK);
         } else {
-            httpServletResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            return null;
-		}
+            httpServletResponse.setStatus(HttpServletResponse.SC_FORBIDDEN);
+        }
 	}
 
     private boolean passwordMatch(String password, User u) {
