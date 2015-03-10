@@ -30,8 +30,8 @@ productControllers.controller('ConnectCtrl', ['$scope', '$location', 'productApp
         }]
 );
 
-productControllers.controller('ProductListCtrl', ['$scope', '$location', 'Products',
-        function ($scope, $location, Products) {
+productControllers.controller('ProductListCtrl', ['$scope', '$location', 'Product',
+        function ($scope, $location, Product) {
             $scope.search = "";
             $scope.sortOption = [
                 "name",
@@ -48,7 +48,7 @@ productControllers.controller('ProductListCtrl', ['$scope', '$location', 'Produc
                 $location.path('product/' + id);
             };
 
-            $scope.products = Products.query();
+            $scope.products = Product.query();
         }]
 );
 
@@ -72,10 +72,14 @@ productControllers.controller('ProductDetailCtrl', ['$scope', '$routeParams', 'P
 
             $scope.order = function (queryAmount) {
                 $scope.product.amount -= queryAmount;
-                Product.save({id: $scope.productId}, $scope.product)
-                    /*.then(function (product) {
-                        $scope.product = product;
-                     })*/;
+                Product.save({id: $scope.productId}, $scope.product,
+                    function (data) {
+                        console.info("product.save OK: ", data);
+                    },
+                    function (data) {
+                        console.error("product.save KO: ", data);
+                    });
+
                 var productInCart = {};
                 productInCart.name = $scope.product.name;
                 productInCart.id = $scope.product.id;
@@ -87,8 +91,8 @@ productControllers.controller('ProductDetailCtrl', ['$scope', '$routeParams', 'P
         }]
 );
 
-productControllers.controller('CartCtrl', ['$scope', '$location', 'CartProducts',
-        function ($scope, $location, CartProducts) {
+productControllers.controller('CartCtrl', ['$scope', '$location', 'CartProduct',
+        function ($scope, $location, CartProduct) {
             $scope.search = "";
             $scope.sortOption = [
                 "name",
@@ -105,6 +109,6 @@ productControllers.controller('CartCtrl', ['$scope', '$location', 'CartProducts'
                 $location.path('product/' + id);
             };
 
-            $scope.products = CartProducts.query();
+            $scope.products = CartProduct.query();
         }]
 );

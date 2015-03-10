@@ -17,7 +17,7 @@ public class CartController {
     @Resource
     private CartService cartService;
 
-    @RequestMapping(value = "/cartProducts", method = RequestMethod.GET)
+    @RequestMapping(value = "/carts", method = RequestMethod.GET)
     public
     @ResponseBody
     List<Product> getCartProducts(HttpServletRequest req) {
@@ -25,7 +25,7 @@ public class CartController {
         return cartService.getCartProducts(user.getLogin());
     }
 
-    @RequestMapping(value = "/cartProduct/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/carts/{id}", method = RequestMethod.GET)
     public
     @ResponseBody
     Product getProduct(@PathVariable("id") String id, HttpServletResponse httpServletResponse, HttpServletRequest req) {
@@ -39,7 +39,7 @@ public class CartController {
         return null;
     }
 
-    @RequestMapping(value = "/cartProduct/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/carts/{id}", method = RequestMethod.POST)
     public
     @ResponseBody
     Product setProduct(@PathVariable("id") String id, @RequestBody Product product, HttpServletResponse httpServletResponse, HttpServletRequest req) {
@@ -64,7 +64,7 @@ public class CartController {
         }
     }
 
-    @RequestMapping(value = "/cartProduct/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/carts/{id}", method = RequestMethod.DELETE)
     public void deleteDelete(@PathVariable String id, HttpServletResponse httpServletResponse, HttpServletRequest req) {
         try {
             User user = (User) req.getSession().getAttribute("user");
