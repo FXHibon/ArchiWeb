@@ -38,11 +38,15 @@ public class ConnectController {
 			authorized = false;
 		} else {
 			authorized = false;
-            for (User u : DbListener.getListOfUsers()) {
+            /*for (User u : DbListener.getListOfUsers()) {
                 if (loginMatch(login, u) && passwordMatch(password, u)) {
                     authorized = true;
 				}
-			}
+			}*/
+            if (connectionService.checkLogin(login, password)) {
+                authorized = true;
+            }
+
 		}
 
 		if (authorized) {
@@ -55,11 +59,11 @@ public class ConnectController {
         }
 	}
 
-    private boolean passwordMatch(String password, User u) {
+    /*private boolean passwordMatch(String password, User u) {
         return u.getPassword().equals(password);
     }
 
     private boolean loginMatch(String login, User u) {
         return u.getLogin().equals(login);
-    }
+    }*/
 }

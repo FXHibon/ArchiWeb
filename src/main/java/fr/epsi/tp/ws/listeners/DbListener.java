@@ -30,28 +30,12 @@ public class DbListener implements ServletContextListener {
         return DriverManager.getConnection(dbUrl, dbUser, dbPassword);
     }
 
-    private static List<User> listOfUsers;
-
-    public static List<User> getListOfUsers() {
-        return listOfUsers;
-    }
 
 	/**
 	 * Default constructor. 
 	 */
     public DbListener() {
         logger.info("Servlet context initialization");
-        listOfUsers = new ArrayList<User>();
-        User user = new User();
-        user.setLogin("ADMIN");
-        user.setPassword("admin");
-        listOfUsers.add(user);
-
-        user = new User();
-        user.setLogin("USER");
-        user.setPassword("user");
-        listOfUsers.add(user);
-
 	}
 
 	/**

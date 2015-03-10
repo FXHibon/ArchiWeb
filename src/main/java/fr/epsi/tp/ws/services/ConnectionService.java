@@ -22,4 +22,11 @@ public interface ConnectionService {
      * @param user       user to connect
      */
     void login(String tokenValue, User user);
+
+    /**
+     * @param login    connection login
+     * @param password connection password
+     * @return true, if the couple login/password is ok
+     */
+    boolean checkLogin(String login, String password);
 }
