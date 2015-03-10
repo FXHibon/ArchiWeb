@@ -1,8 +1,8 @@
-package fr.epsi.firstprojects.services.impl;
+package fr.epsi.tp.ws.services.impl;
 
-import fr.epsi.firstprojects.beans.Product;
-import fr.epsi.firstprojects.listeners.DbListener;
-import fr.epsi.firstprojects.services.ProductService;
+import fr.epsi.tp.ws.beans.Product;
+import fr.epsi.tp.ws.listeners.DbListener;
+import fr.epsi.tp.ws.services.ProductService;
 import org.apache.log4j.Logger;
 
 import java.sql.*;

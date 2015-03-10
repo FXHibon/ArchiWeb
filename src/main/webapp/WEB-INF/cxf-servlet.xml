@@ -11,9 +11,9 @@
     http://cxf.apache.org/schemas/jaxws.xsd">
 
     <jaxws:server
-            serviceClass="fr.epsi.firstprojects.controllers.soap.ProductService" address="/product"
+            serviceClass="fr.epsi.tp.ws.controllers.soap.ProductService" address="/product"
             serviceBean="#product">
 
     </jaxws:server>
-    <bean id="product" class="fr.epsi.firstprojects.controllers.soap.ProductServiceImpl"/>
+    <bean id="product" class="fr.epsi.tp.ws.controllers.soap.ProductServiceImpl"/>
 </beans>

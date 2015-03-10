@@ -1,8 +1,8 @@
-package fr.epsi.firstprojects.services;
+package fr.epsi.tp.ws.services;
 
 import java.util.List;
 
-import fr.epsi.firstprojects.beans.Product;
+import fr.epsi.tp.ws.beans.Product;
 
 public interface ProductService {
 

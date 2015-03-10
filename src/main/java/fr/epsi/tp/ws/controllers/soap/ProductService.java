@@ -1,6 +1,6 @@
-package fr.epsi.firstprojects.controllers.soap;
+package fr.epsi.tp.ws.controllers.soap;
 
-import fr.epsi.firstprojects.beans.Product;
+import fr.epsi.tp.ws.beans.Product;
 
 import javax.jws.WebParam;
 import javax.jws.WebService;

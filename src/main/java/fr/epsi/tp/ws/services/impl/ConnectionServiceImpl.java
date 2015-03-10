@@ -1,7 +1,7 @@
-package fr.epsi.firstprojects.services.impl;
+package fr.epsi.tp.ws.services.impl;
 
-import fr.epsi.firstprojects.beans.User;
-import fr.epsi.firstprojects.services.ConnectionService;
+import fr.epsi.tp.ws.beans.User;
+import fr.epsi.tp.ws.services.ConnectionService;
 
 import java.util.HashMap;
 import java.util.Map;

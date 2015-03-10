@@ -1,6 +1,6 @@
-package fr.epsi.firstprojects.listeners;
+package fr.epsi.tp.ws.listeners;
 
-import fr.epsi.firstprojects.beans.User;
+import fr.epsi.tp.ws.beans.User;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletContextEvent;

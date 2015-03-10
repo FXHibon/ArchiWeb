@@ -1,6 +1,6 @@
-package fr.epsi.firstprojects.services;
+package fr.epsi.tp.ws.services;
 
-import fr.epsi.firstprojects.beans.User;
+import fr.epsi.tp.ws.beans.User;
 
 /**
  * Created by Fx on 26/02/2015.

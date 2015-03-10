@@ -1,4 +1,4 @@
-package fr.epsi.firstprojects.beans;
+package fr.epsi.tp.ws.beans;
 
 public class User {
 
