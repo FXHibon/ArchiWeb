@@ -116,7 +116,7 @@ public class CartServiceImpl implements CartService {
             try {
                 Connection conn = DbListener.getConnection();
                 PreparedStatement stmt = conn
-                        .prepareStatement("SELECT * FROM CARTS WHERE USER=? AND PRODUCT=?");
+                        .prepareStatement("SELECT ID, NAME, IMAGE, DESCRIPTION, CARTS.AMOUNT FROM PRODUCTS, CARTS WHERE CARTS.USER =? AND CARTS.PRODUCT=? AND CARTS.PRODUCT = PRODUCTS.ID");
                 stmt.setString(1, user);
                 stmt.setString(2, productId);
                 results = stmt.executeQuery();
@@ -124,9 +124,9 @@ public class CartServiceImpl implements CartService {
                     product = new Product();
                     product.setId(results.getString("id"));
                     product.setName(results.getString("name"));
+                    product.setImage(results.getString("image"));
                     product.setDescription(results.getString("description"));
                     product.setAmount(results.getInt("amount"));
-                    product.setImage(results.getString("image"));
                 }
 
                 results.close();
