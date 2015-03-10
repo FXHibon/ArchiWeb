@@ -1,35 +1,39 @@
 <md-toolbar>
     <div class="md-toolbar-tools" layout="row">
         <div class="md-toolbar-tools" layout="row">
-            <span>Product App</span>
+            <span>Product App - product - {{ product.name }}</span>
         </div>
     </div>
 </md-toolbar>
-<div class="sample" layout="column" layout-fill layout-align="center center">
-    <md-tabs md-selected="selectedIndex" flex>
+<div class="sample" layout="column" layout-fill>
+    <md-tabs md-selected="selectedIndex">
 
-        <md-tab label="Product Detail">
-            <md-card class="demo-tab" layout="column" layout-align="space-around center">
-                <p>{{ product.name }}</p>
+        <md-tab label="Product Detail" l>
+            <md-card class="product-detail-tab" layout="column" layout-align="space-around center" layout-fill>
+                <div>
+                    <img ng-src="{{product.image}}" alt="{{product.name}}" class="product-detail-image">
+                </div>
 
-                <p>{{ product.image }}</p>
+                <h1>{{ product.name }}</h1>
 
                 <p>{{ product.description }}</p>
 
-                <p>{{ product.amount }}</p>
+                <p>stock: <b> {{ product.amount }}</b></p>
             </md-card>
         </md-tab>
 
-        <md-tab label="Shop">
-            <md-card class="demo-tab" layout="column" layout-align="space-around center">
+        <md-tab class="product-order-tab" label="Shop">
+            <md-card layout="column" layout-align="space-around center">
                 <form name="orderForm">
                     <md-input-container>
                         <label for="amount-input">Amount</label>
-                        <input id="amount-input" ng-model="queryAmount" type="number" min="1" max="{{ product.amount }}"
+                        <input id="amount-input" ng-model="queryAmount" type="number" min="0" max="{{ product.amount }}"
                                required="">
                     </md-input-container>
                     <md-input-container>
-                        <md-button class="md-raised md-primary" ng-click="order(queryAmount)">Order</md-button>
+                        <md-button class="md-raised md-primary" ng-disabled="orderForm.$invalid"
+                                   ng-click="order(queryAmount)">Order
+                        </md-button>
                     </md-input-container>
                 </form>
             </md-card>

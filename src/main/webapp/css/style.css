@@ -230,3 +230,7 @@
     margin-top: 15px;
     margin-bot: 15px;
 }
+
+.product-detail-image {
+    border-radius: 50px;
+}
