@@ -14,12 +14,27 @@ productServices.factory('productAppConnexion', function ($http) {
 productServices.factory('Product', ['$resource',
     function ($resource) {
         return $resource('rest/products/:id');
-    }]);
+    }]
+);
 
 productServices.factory('Products', ['$resource',
         function ($resource) {
             return $resource('rest/products', {}, {
                 query: {method: 'GET', isArray: true}
             });
+        }]
+);
+
+productServices.factory('CartProducts', ['$resource',
+        function ($resource) {
+            return $resource('rest/cartProducts', {}, {
+                query: {method: 'GET', isArray: true}
+            });
+        }]
+);
+
+productServices.factory('CartProduct', ['$resource',
+        function ($resource) {
+            return $resource('rest/cartProduct/:id');
         }]
 );

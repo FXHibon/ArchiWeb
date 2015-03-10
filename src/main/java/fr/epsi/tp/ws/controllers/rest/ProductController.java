@@ -37,7 +37,9 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/products/{id}", method = RequestMethod.POST)
-    public Product setProduct(@PathVariable("id") String id, @RequestBody Product product, HttpServletResponse httpServletResponse) {
+    public
+    @ResponseBody
+    Product setProduct(@PathVariable("id") String id, @RequestBody Product product, HttpServletResponse httpServletResponse) {
         if (product != null) {
             try {
                 productService.updateProduct(product);

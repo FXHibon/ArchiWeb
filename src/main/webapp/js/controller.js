@@ -52,8 +52,8 @@ productControllers.controller('ProductListCtrl', ['$scope', '$location', 'Produc
         }]
 );
 
-productControllers.controller('ProductDetailCtrl', ['$scope', '$routeParams', 'Product',
-        function ($scope, $routeParams, Product) {
+productControllers.controller('ProductDetailCtrl', ['$scope', '$routeParams', 'Product', 'CartProduct',
+        function ($scope, $routeParams, Product, CartProduct) {
             $scope.tab = {
                 selectedIndex: 0
             };
@@ -73,9 +73,38 @@ productControllers.controller('ProductDetailCtrl', ['$scope', '$routeParams', 'P
             $scope.order = function (queryAmount) {
                 $scope.product.amount -= queryAmount;
                 Product.save({id: $scope.productId}, $scope.product)
-                    .then(function (product) {
+                    /*.then(function (product) {
                         $scope.product = product;
-                    });
+                     })*/;
+                var productInCart = {};
+                productInCart.name = $scope.product.name;
+                productInCart.id = $scope.product.id;
+                productInCart.image = $scope.product.image;
+                productInCart.description = $scope.product.description;
+                productInCart.amount = queryAmount;
+                CartProduct.save({id: $scope.productId}, productInCart);
             }
+        }]
+);
+
+productControllers.controller('CartCtrl', ['$scope', '$location', 'CartProducts',
+        function ($scope, $location, CartProducts) {
+            $scope.search = "";
+            $scope.sortOption = [
+                "name",
+                "amount"
+            ];
+
+            $scope.reverse = false;
+
+            $scope.reverseSort = function () {
+                $scope.reverse = !$scope.reverse;
+            };
+
+            $scope.onClickCart = function (id) {
+                $location.path('product/' + id);
+            };
+
+            $scope.products = CartProducts.query();
         }]
 );

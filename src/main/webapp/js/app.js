@@ -18,6 +18,10 @@ productApp.config(['$routeProvider',
                 templateUrl: 'view/product-detail.html',
                 controller: 'ProductDetailCtrl'
             }).
+            when('/cart', {
+                templateUrl: 'view/cart.html',
+                controller: 'CartCtrl'
+            }).
             otherwise({
                 redirectTo: '/connection'
             });

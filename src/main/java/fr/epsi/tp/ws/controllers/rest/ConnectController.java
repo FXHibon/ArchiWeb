@@ -52,6 +52,7 @@ public class ConnectController {
 		if (authorized) {
 			String tokenValue = UUID.randomUUID().toString();
             request.getSession(true).setAttribute("token", tokenValue);
+            request.getSession(true).setAttribute("user", user);
             connectionService.login(tokenValue, user);
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
         } else {
