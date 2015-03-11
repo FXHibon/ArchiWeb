@@ -8,7 +8,7 @@ productApp.config(['$routeProvider',
         $routeProvider.
             when('/connection', {
                 templateUrl: 'view/connect.html',
-                controller: 'ConnectCtrl'
+                controller: 'ConnectionCtrl'
             }).
             when('/product', {
                 templateUrl: 'view/product-list.html',
