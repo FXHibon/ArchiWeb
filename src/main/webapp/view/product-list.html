@@ -1,27 +1,3 @@
-<md-toolbar>
-    <div class="md-toolbar-tools" layout="row">
-        <div class="md-toolbar-tools" layout="row">
-            <span>Product App - products</span>
-        </div>
-        <div class="md-toolbar-tools" layout="row" layout-align="end center">
-            <div layout="row">
-                <md-icon md-svg-src="resources/search.svg" alt="search"></md-icon>
-                <md-input-container class="product-list-toolbar-search">
-                    <label>Search</label>
-                    <input ng-model="search">
-                </md-input-container>
-                <md-icon md-svg-src="resources/sort.svg" alt="search"></md-icon>
-                <md-select ng-model="sort" placeholder="name" class="product-list-toolbar-sort">
-                    <md-option ng-value="opt" ng-repeat="opt in sortOption">{{opt}}</md-option>
-                </md-select>
-                <md-button ng-click="reverseSort()" class="md-secondary md-fab product-list-toolbar-revert-sort"
-                           aria-label="swap">
-                    <md-icon md-svg-src="resources/swapVert.svg"></md-icon>
-                </md-button>
-            </div>
-        </div>
-    </div>
-</md-toolbar>
 <div layout="column" layout-align="start center">
     <div layout="column">
         <md-card ng-repeat="product in products | filter:search | orderBy : sort : reverse" class="product-list-item">

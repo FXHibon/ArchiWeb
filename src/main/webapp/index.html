@@ -18,6 +18,7 @@
     <script src="js/controller.js"></script>
 
     <!-- controllers -->
+    <script src="js/controllers/appCtrl.js"></script>
     <script src="js/controllers/connectionCtrl.js"></script>
     <script src="js/controllers/productListCtrl.js"></script>
     <script src="js/controllers/productDetailCtrl.js"></script>
@@ -34,8 +35,62 @@
     <!-- css perso -->
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
-<body ng-app="productApp">
-<md-content ng-view layout="column">
+<body ng-app="productApp" ng-controller="AppCtrl">
+<md-toolbar>
+    <div class="md-toolbar-tools" layout="row">
+        <div class="md-toolbar-tools" layout="row">
+            <span>Product App</span>
+        </div>
+        <div class="md-toolbar-tools">
+            <md-tabs md-selected="data.selectedIndex">
+                <md-tab id="list" aria-controls="list-content">List</md-tab>
+                <md-tab id="cart" aria-controls="cart-content">Cart</md-tab>
+                <md-tab id="details" aria-controls="details-content">Details</md-tab>
+                <md-tab id="order" aria-controls="order-content">Order</md-tab>
+            </md-tabs>
+        </div>
+        <div class="md-toolbar-tools" layout="row" layout-align="end center">
+            <div layout="row">
+                <md-icon md-svg-src="resources/search.svg" alt="search"></md-icon>
+                <md-input-container class="product-list-toolbar-search">
+                    <label>Search</label>
+                    <input ng-model="search">
+                </md-input-container>
+                <md-icon md-svg-src="resources/sort.svg" alt="search"></md-icon>
+                <md-select ng-model="sort" placeholder="name" class="product-list-toolbar-sort">
+                    <md-option ng-value="opt" ng-repeat="opt in sortOption">{{opt}}</md-option>
+                </md-select>
+                <md-button ng-click="reverseSort()" class="md-secondary md-fab product-list-toolbar-revert-sort"
+                           aria-label="swap">
+                    <md-icon md-svg-src="resources/swapVert.svg"></md-icon>
+                </md-button>
+            </div>
+        </div>
+    </div>
+</md-toolbar>
+<md-content layout-padding flex>
+    <ng-switch on="data.selectedIndex" class="tabpanel-container">
+        <div role="tabpanel" id="list-content" aria-labelledby="list" ng-switch-when="0" md-swipe-left="next()"
+             md-swipe-right="previous()">
+            <div ng-include="view/product-list.html"></div>
+        </div>
+
+        <div role="tabpanel" id="cart-content" aria-labelledby="cart" ng-switch-when="1" md-swipe-left="next()"
+             md-swipe-right="previous()">
+            <div ng-include="view/cart.html"></div>
+        </div>
+
+        <div role="tabpanel" id="details-content" aria-labelledby="details" ng-switch-when="2" md-swipe-left="next()"
+             md-swipe-right="previous()">
+            <div ng-include="view/product-detail.html"></div>
+        </div>
+        <div role="tabpanel" id="order-content" aria-labelledby="order" ng-switch-when="3" md-swipe-left="next()"
+             md-swipe-right="previous()">
+            page 3
+        </div>
+    </ng-switch>
 </md-content>
+<!--<md-content ng-view layout="column">
+</md-content>-->
 </body>
 </html>
