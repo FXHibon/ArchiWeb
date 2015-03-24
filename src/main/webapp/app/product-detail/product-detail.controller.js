@@ -1,6 +1,12 @@
 (function () {
-    angular.module('productControllers')
-        .controller('ProductDetailCtrl', ['$scope', '$routeParams', 'Product', 'CartProduct', productDetailCtrl]);
+
+    'use strict';
+
+    angular
+        .module('ProductApp')
+        .controller('ProductDetailCtrl', productDetailCtrl);
+
+    productDetailCtrl.$inject = ['$scope', '$routeParams', 'Product', 'CartProduct'];
 
     function productDetailCtrl($scope, $routeParams, Product, CartProduct) {
         $scope.tab = {
@@ -37,5 +43,5 @@
             productInCart.amount = queryAmount;
             CartProduct.save({id: $scope.productId}, productInCart);
         }
-    };
+    }
 })();

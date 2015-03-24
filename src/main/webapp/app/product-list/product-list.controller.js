@@ -1,8 +1,18 @@
-(function () {
-    angular.module('productControllers')
-        .controller('CartCtrl', ['$scope', '$location', 'CartProduct', cartCtrl]);
+/**
+ * Created by fx on 24/03/2015.
+ */
 
-    function cartCtrl($scope, $location, CartProduct) {
+(function () {
+
+    'use strict';
+
+    angular
+        .module('ProductApp')
+        .controller('ProductListCtrl', productListCtrl);
+
+    productListCtrl.$inject = ['$scope', '$location', 'Product'];
+
+    function productListCtrl($scope, $location, Product) {
         $scope.search = "";
         $scope.sortOption = [
             "name",
@@ -19,6 +29,6 @@
             $location.path('product/' + id);
         };
 
-        $scope.products = CartProduct.query();
-    };
+        $scope.products = Product.query();
+    }
 })();

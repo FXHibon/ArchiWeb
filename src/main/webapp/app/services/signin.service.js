@@ -4,7 +4,7 @@
 
 (function () {
     angular
-        .module('productServices')
+        .module('ProductApp')
         .factory('productAppConnexion', productAppConnexionFct);
 
     function productAppConnexionFct($http) {

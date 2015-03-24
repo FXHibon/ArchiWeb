@@ -4,9 +4,11 @@
 
 (function () {
     angular
-        .module('productServices')
-        .factory('Product', ['$resource', productFct]
-    );
+        .module('ProductApp')
+        .factory('Product', productFct);
+
+    productFct.$inject = ['$resource'];
+
     function productFct($resource) {
         return $resource('rest/products/:id');
     }

@@ -5,18 +5,18 @@
         </div>
         <div class="md-toolbar-tools" layout="row" layout-align="end center">
             <div layout="row">
-                <md-icon md-svg-src="resources/search.svg" alt="search"></md-icon>
+                <md-icon md-svg-src="app/resources/search.svg" alt="search"></md-icon>
                 <md-input-container class="product-list-toolbar-search">
                     <label>Search</label>
                     <input ng-model="search">
                 </md-input-container>
-                <md-icon md-svg-src="resources/sort.svg" alt="search"></md-icon>
+                <md-icon md-svg-src="app/resources/sort.svg" alt="search"></md-icon>
                 <md-select ng-model="sort" placeholder="name" class="product-list-toolbar-sort">
                     <md-option ng-value="opt" ng-repeat="opt in sortOption">{{opt}}</md-option>
                 </md-select>
                 <md-button ng-click="reverseSort()" class="md-secondary md-fab product-list-toolbar-revert-sort"
                            aria-label="swap">
-                    <md-icon md-svg-src="resources/swapVert.svg"></md-icon>
+                    <md-icon md-svg-src="app/resources/swapVert.svg"></md-icon>
                 </md-button>
             </div>
         </div>
@@ -42,14 +42,14 @@
                         <div class="product-list-item-more">
                             <md-button class="md-secondary md-fab product-list-item-more-image"
                                        aria-label="more">
-                                <md-icon md-svg-src="resources/more.svg"></md-icon>
+                                <md-icon md-svg-src="app/resources/more.svg"></md-icon>
                             </md-button>
                         </div>
                         <div lass="product-list-item-order">
                             <md-button ng-click="onClickCart(product.id)"
                                        class="md-secondary md-fab product-list-item-order-image"
                                        aria-label="order">
-                                <md-icon md-svg-src="resources/order.svg"></md-icon>
+                                <md-icon md-svg-src="app/resources/order.svg"></md-icon>
                             </md-button>
                         </div>
                     </div>

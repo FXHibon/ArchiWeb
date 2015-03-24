@@ -1,8 +1,13 @@
 (function () {
-    angular.module('productControllers')
-        .controller('ProductListCtrl', ['$scope', '$location', 'Product', productListCtrl]);
 
-    function productListCtrl($scope, $location, Product) {
+    'use strict';
+
+    angular.module('ProductApp')
+        .controller('CartCtrl', cartCtrl);
+
+    cartCtrl.$inject = ['$scope', '$location', 'CartProduct'];
+
+    function cartCtrl($scope, $location, CartProduct) {
         $scope.search = "";
         $scope.sortOption = [
             "name",
@@ -19,6 +24,6 @@
             $location.path('product/' + id);
         };
 
-        $scope.products = Product.query();
-    };
+        $scope.products = CartProduct.query();
+    }
 })();
